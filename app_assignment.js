@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({limit:'10mb',extended:true}));
 
 //lets define configuration of database 
 
-var middleware = require('./midddleware_assign.js');
+var middleware = require('./middleware_assign.js');
 
 mongoose.connection.once('open', function() {
 
@@ -84,14 +84,14 @@ app.post('/create',function(req,res){
 		 // res.send("wrong id entered");
 		 
 		// console.log("2");
-		  next("not valid  id ");
+		  next("not valid  id ");  //if the id is not lowercase alphanumberic then it is invalid
 	  }
 	
 		blogO.findOne({'_id':req.params.id},function(err,result){
 			    
 				if(err){
 					res.status = 403;
-					next("id not found");
+					next("id not found");  // if the id is not present in the database
 				}
 				else
 					res.send(result);
