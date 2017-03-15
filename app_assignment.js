@@ -46,7 +46,7 @@ app.post('/create',function(req,res){
 		var blogN = new blogO({
 		  title : req.body.title,
 		  subTitle :req.body.subTitle,
-		  genre : req.body.genre,
+		  language : req.body.language,
 		  blogBody : req.body.blogBody 
 		  	
 		});
@@ -76,6 +76,7 @@ app.post('/create',function(req,res){
   
   
   
+  // API to find a particular blog by id 
   app.get('/findPBlog/:id',middleware.checkValid,function(req,res,next){
 	  
 	  //alert("123");
@@ -98,6 +99,8 @@ app.post('/create',function(req,res){
 		});
 });
 
+// API to log the error messages
+
 app.use(function(err,req,res,next){
 	
 	//console.log(err);
@@ -113,9 +116,6 @@ app.use(function(err,req,res,next){
 
 //API to view all blogs
 
-
-
-
 app.get('/findAll',function(req,res){
 	
 	  blogO.find(function(err,result){
@@ -126,12 +126,15 @@ app.get('/findAll',function(req,res){
 	  });
 });
 
+
 // if user enter a wrong route 
 
 app.get('/*',function(req,res){
 	     res.send("u have entered a wrong route");
 });
 
+
+// Route to update the blog by particular id
 
 app.put('/update/:id',function(req,res){
 	
@@ -146,6 +149,7 @@ app.put('/update/:id',function(req,res){
 	
 });
 
+//Route to delete a blog by id 
 
 app.post('/delete/:id',function(req,res){
 	
